@@ -1,0 +1,18 @@
+# deps / build
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# env
+.env*
+!.env.example
+
+# vercel
+.vercel/
+
+# local tooling
+.lavish/
+.claude/settings.local.json
+.DS_Store
