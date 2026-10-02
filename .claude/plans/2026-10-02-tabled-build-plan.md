@@ -1,6 +1,6 @@
 # Tabled Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans (native, single session) to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Build window is 60 minutes. Task order is the cut order in reverse: if time runs out, the last tasks are the ones to drop.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking. Build window is 60 minutes. Task order is the cut order in reverse: if time runs out, the last tasks are the ones to drop.
 
 **Goal:** A single-page Next.js app that reads a seeded student's transactions, matches them against a student-discount catalog, and shows "$X / year left on the table" with five fixes, a two-sentence Gemini summary, and a chat rail.
 
