@@ -4,6 +4,15 @@ Hackathon prototype: reads a student's bank transactions, matches them against a
 
 Plan: `.claude/plans/2026-10-02-tabled-build-plan.md`. Build it in task order. If time runs out, cut from the end.
 
+## Cash-flow prototype addition (2026-10-02)
+
+The user requested and authorized a backend for the "Can I afford this?" concept, followed by a commit, push, and Claude UI handoff. This addition supplies that backend; it does not implement the earlier discount-finder plan. For the cash-flow UI, use the handoff in `CLAUDE.md` and the existing API instead of reimplementing the calculations.
+
+- Cash-flow amounts, limits, and decisions come from `lib/cashflow.mjs` through `/api/cashflow/assess`. The `lib/matcher.ts` source-of-numbers rule below applies to the separate discount-finder workflow.
+- The cash-flow backend uses a sample profile and 25 transactions in `lib/data/cashflow-demo.json`, with optional custom inputs. It needs no API key or added dependency; explanations are deterministic, two-sentence text.
+- Preserve the design tokens and the existing no-auth, no-database, no-live-Plaid constraints. Clearly label the sample data as a demo.
+- Verify the standalone backend with Node 24: `node --test tests/cashflow.test.mjs`. Run the application checks below after the Next.js scaffold exists. The scaffold, frontend, and deployment are not included in this backend change.
+
 ## Non-negotiables
 
 - Every dollar figure on screen comes from `lib/matcher.ts`. Gemini writes prose only and must never invent a number or merchant.

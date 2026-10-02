@@ -1,0 +1,49 @@
+# Local demo: node scripts/cashflow-server.mjs (Node 24)
+# Tests: node --test tests/cashflow.test.mjs
+# In an existing Next.js app, copy app/, lib/, scripts/, and tests/ into its root.
+# Next.js serves the same endpoints on its own port; no standalone server needed.
+@baseUrl = http://127.0.0.1:3001
+
+### Load the 25 sample transactions, student profile, and chart preview
+GET {{baseUrl}}/api/cashflow/demo
+
+### Demo: $180 concert -> buffer_risk, safeToSpend: 110
+POST {{baseUrl}}/api/cashflow/assess
+Content-Type: application/json
+
+{
+  "purchase": { "label": "Concert ticket", "amount": 180 }
+}
+
+### Demo: $100 concert -> comfortable
+POST {{baseUrl}}/api/cashflow/assess
+Content-Type: application/json
+
+{
+  "purchase": { "label": "Concert ticket", "amount": 100 }
+}
+
+### Custom profile: all dates explicit, no hidden merge with sample data
+# For JSON transaction uploads, pass transactions alongside this profile.
+# To derive everyday expenses from those transactions, omit dailyEssentials
+# and provide historyStart (YYYY-MM-DD). Each transaction needs id, date,
+# name, positive amount, and kind: essential | discretionary | bill | income.
+POST {{baseUrl}}/api/cashflow/assess
+Content-Type: application/json
+
+{
+  "profile": {
+    "name": "Alex",
+    "currency": "USD",
+    "asOf": "2026-10-02",
+    "currentBalance": 500,
+    "minimumBuffer": 100,
+    "savingsReserve": 50,
+    "dailyEssentials": 15,
+    "nextIncome": { "date": "2026-10-09", "amount": 300 },
+    "upcomingBills": [
+      { "id": "utilities", "label": "Utilities share", "date": "2026-10-05", "amount": 60 }
+    ]
+  },
+  "purchase": { "label": "Dinner out", "amount": 40 }
+}
